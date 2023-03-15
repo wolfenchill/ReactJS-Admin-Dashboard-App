@@ -1,17 +1,16 @@
-name: Test Workflow
-description: Workflow that runs tests when a pull request is opened
+name: Create diagram
 on:
-  pull_request:
+  workflow_dispatch: {}
+  push:
     branches:
       - main
 jobs:
-  my-job:
+  get_data:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
-      
-      - name: Generate repository visualization
-        uses: githubocto/repo-visualizer@v0.1.0
+        uses: actions/checkout@master
+      - name: Update diagram
+        uses: githubocto/repo-visualizer@main
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          excluded_paths: "ignore,.github"
